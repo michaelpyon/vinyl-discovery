@@ -72,7 +72,7 @@ export default function Sidebar({
                 <div className="vinyl-spin__label" />
               </div>
             </div>
-            <p>Click the globe or drop a random pin to start digging.</p>
+            <p>Tap the globe or drop a random pin to start digging.</p>
             <p className="sidebar__empty-sub">
               Discover record stores, local genres, and staff picks from around
               the world.

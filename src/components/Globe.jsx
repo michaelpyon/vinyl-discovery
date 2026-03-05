@@ -150,7 +150,7 @@ export default function Globe({ onPinDrop, onStoreClick, droppedPin }) {
           animateIn={true}
         />
       )}
-      <div className="globe-hint">Click anywhere on the globe to drop a pin</div>
+      <div className="globe-hint">Tap anywhere on the globe to drop a pin</div>
     </div>
   )
 }
