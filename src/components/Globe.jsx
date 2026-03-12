@@ -6,10 +6,77 @@ import { getGenreColor } from "../data/genreColors"
 const GLOBE_IMAGE = "//unpkg.com/three-globe/example/img/earth-night.jpg"
 const BUMP_IMAGE = "//unpkg.com/three-globe/example/img/earth-topology.png"
 
+// Detect WebGL support
+function hasWebGL() {
+  try {
+    const canvas = document.createElement("canvas")
+    return !!(
+      window.WebGLRenderingContext &&
+      (canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
+    )
+  } catch {
+    return false
+  }
+}
+
+// Fallback: city grid the user can click to drop a pin
+const FALLBACK_CITIES = [
+  { lat: 40.7128, lng: -74.006, label: "New York", emoji: "🗽" },
+  { lat: 51.5074, lng: -0.1278, label: "London", emoji: "🎡" },
+  { lat: 35.6762, lng: 139.6503, label: "Tokyo", emoji: "⛩️" },
+  { lat: 52.52, lng: 13.405, label: "Berlin", emoji: "🐻" },
+  { lat: -37.8136, lng: 144.9631, label: "Melbourne", emoji: "🦘" },
+  { lat: 48.8566, lng: 2.3522, label: "Paris", emoji: "🗼" },
+  { lat: 45.5231, lng: -122.6765, label: "Portland", emoji: "🌲" },
+  { lat: 18.012, lng: -76.7936, label: "Kingston", emoji: "🎵" },
+  { lat: 6.5244, lng: 3.3792, label: "Lagos", emoji: "🌍" },
+  { lat: 36.1627, lng: -86.7816, label: "Nashville", emoji: "🎸" },
+  { lat: -23.5505, lng: -46.6333, label: "São Paulo", emoji: "🌴" },
+  { lat: 37.5665, lng: 126.978, label: "Seoul", emoji: "🏙️" },
+  { lat: 23.1136, lng: -82.3666, label: "Havana", emoji: "🎺" },
+  { lat: 34.0522, lng: -118.2437, label: "Los Angeles", emoji: "🌅" },
+  { lat: 41.8781, lng: -87.6298, label: "Chicago", emoji: "🎷" },
+  { lat: 28.6139, lng: 77.209, label: "New Delhi", emoji: "🕌" },
+]
+
+function GlobeFallback({ onPinDrop, onStoreClick }) {
+  return (
+    <div className="globe-container globe-fallback">
+      <div className="fallback-inner">
+        <div className="fallback-header">
+          <div className="fallback-icon">🌍</div>
+          <h2 className="fallback-title">Explore by City</h2>
+          <p className="fallback-subtitle">
+            Pick a city to discover nearby record stores
+          </p>
+        </div>
+        <div className="fallback-grid">
+          {FALLBACK_CITIES.map((city) => (
+            <button
+              key={city.label}
+              className="fallback-city-btn"
+              onClick={() => onPinDrop({ lat: city.lat, lng: city.lng })}
+            >
+              <span className="fallback-city-emoji">{city.emoji}</span>
+              <span className="fallback-city-name">{city.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Globe({ onPinDrop, onStoreClick, droppedPin }) {
   const globeRef = useRef()
   const containerRef = useRef()
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
+  const [webglSupported] = useState(() => hasWebGL())
+
+  // If no WebGL, render the fallback immediately
+  if (!webglSupported) {
+    return <GlobeFallback onPinDrop={onPinDrop} onStoreClick={onStoreClick} />
+  }
 
   // Resize observer
   useEffect(() => {
@@ -47,7 +114,6 @@ export default function Globe({ onPinDrop, onStoreClick, droppedPin }) {
     ({ lat, lng }) => {
       stopRotation()
       onPinDrop({ lat, lng })
-      // Fly to the clicked location
       if (globeRef.current) {
         globeRef.current.pointOfView({ lat, lng, altitude: 1.5 }, 800)
       }
@@ -97,7 +163,6 @@ export default function Globe({ onPinDrop, onStoreClick, droppedPin }) {
     ]
   }, [droppedPin])
 
-  // Combine store points and pin
   const allPoints = useMemo(
     () => [...storePoints, ...pinPoints],
     [storePoints, pinPoints]
