@@ -72,6 +72,7 @@ export default function Globe({ onPinDrop, onStoreClick, droppedPin }) {
   const containerRef = useRef()
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
   const [webglSupported] = useState(() => hasWebGL())
+  const [globeReady, setGlobeReady] = useState(false)
 
   // If no WebGL, render the fallback immediately
   if (!webglSupported) {
@@ -92,14 +93,18 @@ export default function Globe({ onPinDrop, onStoreClick, droppedPin }) {
     return () => ro.disconnect()
   }, [])
 
-  // Auto-rotate and initial position
-  useEffect(() => {
+  // Called by react-globe.gl once the Three.js scene + controls are ready.
+  // This is the correct place to configure the globe — globeRef.current is
+  // guaranteed to be populated here (unlike a useEffect([]) which fires
+  // before ReactGlobe has mounted when dimensions start at 0).
+  const handleGlobeReady = useCallback(() => {
     const globe = globeRef.current
     if (!globe) return
     globe.controls().autoRotate = true
     globe.controls().autoRotateSpeed = 0.4
     globe.controls().enableDamping = true
     globe.pointOfView({ lat: 30, lng: -20, altitude: 2.2 }, 0)
+    setGlobeReady(true)
   }, [])
 
   // Stop rotation on interaction
@@ -205,6 +210,7 @@ export default function Globe({ onPinDrop, onStoreClick, droppedPin }) {
           pointLabel="label"
           onPointClick={handlePointClick}
           onGlobeClick={handleGlobeClick}
+          onGlobeReady={handleGlobeReady}
           ringsData={ringData}
           ringLat="lat"
           ringLng="lng"
@@ -214,6 +220,13 @@ export default function Globe({ onPinDrop, onStoreClick, droppedPin }) {
           ringColor={() => "#f97316"}
           animateIn={true}
         />
+      )}
+      {/* Loading overlay — visible until globe textures are ready */}
+      {!globeReady && dimensions.width > 0 && (
+        <div className="globe-loading">
+          <div className="globe-loading-spinner" />
+          <span className="globe-loading-text">Loading globe…</span>
+        </div>
       )}
       <div className="globe-hint">Tap anywhere on the globe to drop a pin</div>
     </div>
