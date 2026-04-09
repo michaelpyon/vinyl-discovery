@@ -12,9 +12,15 @@
   --text-subtle: #737373;
   --accent: #f97316;
   --accent-dim: rgba(249, 115, 22, 0.15);
+  --accent-glow: rgba(249, 115, 22, 0.3);
+  --accent-hover: rgba(249, 115, 22, 0.25);
   --accent-secondary: #e8d48b;
   --accent-warm: #d4a05a;
   --accent-cool: #5b8fb9;
+  --vinyl-dark: #1a1a1a;
+  --vinyl-groove: #252525;
+  --vinyl-edge: #333;
+  --globe-glow: #1a1020;
   --sidebar-width: 420px;
 }
 
@@ -49,7 +55,7 @@ body {
   flex: 1;
   position: relative;
   cursor: crosshair;
-  background: radial-gradient(ellipse at center, #1a1020 0%, var(--bg) 70%);
+  background: radial-gradient(ellipse at center, var(--globe-glow) 0%, var(--bg) 70%);
 }
 
 .globe-container canvas {
@@ -78,7 +84,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 16px;
-  background: radial-gradient(ellipse at center, #1a1020 0%, var(--bg) 70%);
+  background: radial-gradient(ellipse at center, var(--globe-glow) 0%, var(--bg) 70%);
   pointer-events: none;
   z-index: 10;
 }
@@ -160,17 +166,17 @@ body {
   align-items: center;
   gap: 4px;
   padding: 12px 8px;
-  background: var(--bg-card, #161616);
-  border: 1px solid var(--border, #2a2a2a);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 10px;
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s, transform 0.1s;
-  color: var(--text-primary, #f5f5f5);
+  color: var(--text);
 }
 
 .fallback-city-btn:hover {
-  background: var(--bg-hover, #1f1f1f);
-  border-color: #f97316;
+  background: var(--surface-hover);
+  border-color: var(--accent);
   transform: translateY(-1px);
 }
 
@@ -183,7 +189,7 @@ body {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.03em;
-  color: var(--text-secondary, #aaa);
+  color: var(--text-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -268,7 +274,7 @@ body {
   width: 100%;
   padding: 12px 16px;
   background: var(--accent-dim);
-  border: 1px solid rgba(249, 115, 22, 0.3);
+  border: 1px solid var(--accent-glow);
   border-radius: 8px;
   color: var(--accent);
   font-size: 13px;
@@ -283,7 +289,7 @@ body {
 }
 
 .random-pin-btn:hover {
-  background: rgba(249, 115, 22, 0.25);
+  background: var(--accent-hover);
   border-color: var(--accent);
 }
 
@@ -316,26 +322,26 @@ body {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: #1a1a1a;
+  background: var(--vinyl-dark);
   position: relative;
   animation: spin 4s linear infinite;
-  border: 2px solid #333;
+  border: 2px solid var(--vinyl-edge);
 }
 
 .vinyl-spin__grooves {
   position: absolute;
   inset: 8px;
   border-radius: 50%;
-  border: 1px solid #252525;
+  border: 1px solid var(--vinyl-groove);
   box-shadow:
-    inset 0 0 0 4px #1a1a1a,
-    inset 0 0 0 5px #252525,
-    inset 0 0 0 9px #1a1a1a,
-    inset 0 0 0 10px #252525,
-    inset 0 0 0 14px #1a1a1a,
-    inset 0 0 0 15px #252525,
-    inset 0 0 0 19px #1a1a1a,
-    inset 0 0 0 20px #252525;
+    inset 0 0 0 4px var(--vinyl-dark),
+    inset 0 0 0 5px var(--vinyl-groove),
+    inset 0 0 0 9px var(--vinyl-dark),
+    inset 0 0 0 10px var(--vinyl-groove),
+    inset 0 0 0 14px var(--vinyl-dark),
+    inset 0 0 0 15px var(--vinyl-groove),
+    inset 0 0 0 19px var(--vinyl-dark),
+    inset 0 0 0 20px var(--vinyl-groove);
 }
 
 .vinyl-spin__label {
@@ -518,10 +524,10 @@ body {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+  background: linear-gradient(135deg, var(--vinyl-dark), var(--bg));
   position: relative;
   animation: spin 6s linear infinite;
-  border: 2px solid #333;
+  border: 2px solid var(--vinyl-edge);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
@@ -529,16 +535,16 @@ body {
   position: absolute;
   inset: 10px;
   border-radius: 50%;
-  border: 1px solid #222;
+  border: 1px solid var(--vinyl-groove);
   box-shadow:
-    inset 0 0 0 5px #1a1a1a,
-    inset 0 0 0 6px #222,
-    inset 0 0 0 11px #1a1a1a,
-    inset 0 0 0 12px #222,
-    inset 0 0 0 17px #1a1a1a,
-    inset 0 0 0 18px #222,
-    inset 0 0 0 23px #1a1a1a,
-    inset 0 0 0 24px #222;
+    inset 0 0 0 5px var(--vinyl-dark),
+    inset 0 0 0 6px var(--vinyl-groove),
+    inset 0 0 0 11px var(--vinyl-dark),
+    inset 0 0 0 12px var(--vinyl-groove),
+    inset 0 0 0 17px var(--vinyl-dark),
+    inset 0 0 0 18px var(--vinyl-groove),
+    inset 0 0 0 23px var(--vinyl-dark),
+    inset 0 0 0 24px var(--vinyl-groove);
 }
 
 .staff-pick__label-center {
@@ -550,7 +556,7 @@ body {
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 10px rgba(249, 115, 22, 0.3);
+  box-shadow: 0 0 10px var(--accent-glow);
 }
 
 .staff-pick__album {
@@ -645,7 +651,7 @@ body {
 
 /* Selection color */
 ::selection {
-  background: rgba(249, 115, 22, 0.3);
+  background: var(--accent-glow);
 }
 
 /* ---- Responsive ---- */
