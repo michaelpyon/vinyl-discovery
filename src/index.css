@@ -654,6 +654,69 @@ body {
   background: var(--accent-glow);
 }
 
+/* ---- Genre Filter Bar ---- */
+.genre-filter {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: calc(var(--sidebar-width) + 16px);
+  z-index: 20;
+  pointer-events: none;
+}
+
+.genre-filter__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 12px 14px;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  pointer-events: auto;
+  max-height: 120px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.genre-filter__inner::-webkit-scrollbar {
+  width: 4px;
+}
+
+.genre-filter__inner::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+.genre-filter__tag {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  border: 1px solid color-mix(in srgb, var(--genre-color) 30%, transparent);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+  font-family: inherit;
+  letter-spacing: 0.02em;
+}
+
+.genre-filter__tag:hover {
+  border-color: color-mix(in srgb, var(--genre-color) 50%, transparent);
+  color: var(--genre-color);
+  background: color-mix(in srgb, var(--genre-color) 8%, transparent);
+}
+
+.genre-filter__tag--active {
+  border-color: color-mix(in srgb, var(--genre-color) 60%, transparent);
+  background: color-mix(in srgb, var(--genre-color) 15%, transparent);
+  color: var(--genre-color);
+  font-weight: 500;
+}
+
 /* ---- Responsive ---- */
 @media (max-width: 768px) {
   :root {
@@ -669,5 +732,14 @@ body {
   .globe-hint {
     bottom: 16px;
     font-size: 11px;
+  }
+
+  .genre-filter {
+    right: 16px;
+    top: 12px;
+  }
+
+  .genre-filter__inner {
+    max-height: 80px;
   }
 }

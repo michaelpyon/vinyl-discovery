@@ -1,6 +1,5 @@
 import { useRef, useEffect, useState, useCallback, useMemo } from "react"
 import ReactGlobe from "react-globe.gl"
-import stores from "../data/stores"
 import { getGenreColor } from "../data/genreColors"
 
 const GLOBE_IMAGE = "//unpkg.com/three-globe/example/img/earth-night.jpg"
@@ -67,7 +66,7 @@ function GlobeFallback({ onPinDrop, onStoreClick }) {
   )
 }
 
-export default function Globe({ onPinDrop, onStoreClick, droppedPin }) {
+export default function Globe({ onPinDrop, onStoreClick, droppedPin, filteredStores = [] }) {
   const globeRef = useRef()
   const containerRef = useRef()
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
@@ -129,7 +128,7 @@ export default function Globe({ onPinDrop, onStoreClick, droppedPin }) {
   // Store points data for the globe
   const storePoints = useMemo(
     () =>
-      stores.map((s) => ({
+      filteredStores.map((s) => ({
         lat: s.lat,
         lng: s.lng,
         size: 0.06,
@@ -137,7 +136,7 @@ export default function Globe({ onPinDrop, onStoreClick, droppedPin }) {
         store: s,
         label: s.name,
       })),
-    []
+    [filteredStores]
   )
 
   // Dropped pin marker
