@@ -1,8 +1,21 @@
 import { useMemo } from "react"
 import StoreCard from "./StoreCard"
 import StaffPick from "./StaffPick"
-import { findNearbyStores, getRegionGenres } from "../data/stores"
+import { getRegionGenres } from "../data/stores"
 import { getGenreColor } from "../data/genreColors"
+
+// Haversine distance between two points in km
+function haversine(lat1, lng1, lat2, lng2) {
+  const R = 6371
+  const dLat = ((lat2 - lat1) * Math.PI) / 180
+  const dLng = ((lng2 - lng1) * Math.PI) / 180
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLng / 2) ** 2
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+}
 
 export default function Sidebar({
   droppedPin,
@@ -11,11 +24,18 @@ export default function Sidebar({
   onRandomPin,
   isOpen,
   onToggle,
+  filteredStores = [],
 }) {
   const nearbyStores = useMemo(() => {
     if (!droppedPin) return []
-    return findNearbyStores(droppedPin.lat, droppedPin.lng, 5000)
-  }, [droppedPin])
+    return filteredStores
+      .map((store) => ({
+        ...store,
+        distance: haversine(droppedPin.lat, droppedPin.lng, store.lat, store.lng),
+      }))
+      .filter((store) => store.distance <= 5000)
+      .sort((a, b) => a.distance - b.distance)
+  }, [droppedPin, filteredStores])
 
   const regionGenres = useMemo(() => {
     return getRegionGenres(nearbyStores)
