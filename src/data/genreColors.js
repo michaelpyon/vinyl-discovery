@@ -54,15 +54,28 @@ const genreColors = {
   "J-Pop": "#f472b6",
   "K-Pop": "#ec4899",
 
-  // Country & Folk
+  // Country & Folk & Americana
   "Country": "#a3e635",
   "Folk": "#84cc16",
+  "Americana": "#65a30d",
   "Blues": "#3b82f6",
+  "Gospel": "#a78bfa",
+
+  // R&B & Brass
+  "R&B": "#d946ef",
+  "Brass Band": "#f59e0b",
+  "Zydeco": "#06b6d4",
+  "Cajun": "#0891b2",
 
   // Classical & Other
   "Classical": "#e2e8f0",
   "Krautrock": "#fb923c",
   "Avant-Garde": "#94a3b8",
+  "Noise": "#6b7280",
+  "Industrial": "#525252",
+  "Garage": "#ef4444",
+  "Latin Rock": "#f97316",
+  "Roots": "#15803d",
 }
 
 export function getGenreColor(genre) {
