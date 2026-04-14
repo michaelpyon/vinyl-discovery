@@ -196,7 +196,7 @@ export default function Sidebar({
         {/* Footer */}
         <footer className="sidebar__footer">
           <p>
-            CrateDigger — Built for vinyl lovers
+            CrateDigger. Built for vinyl lovers.
           </p>
         </footer>
       </div>
