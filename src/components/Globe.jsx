@@ -147,7 +147,7 @@ const Globe = forwardRef(function Globe(
     const el = containerRef.current
     if (!el) return
 
-    const events = ["mousedown", "mousemove", "wheel", "touchstart", "touchmove"]
+    const events = ["mousedown", "wheel", "touchstart", "touchmove"]
     events.forEach((evt) => el.addEventListener(evt, handleInteraction, { passive: true }))
 
     return () => {

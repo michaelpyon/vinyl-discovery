@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useRef } from "react"
+import { useState, useCallback, useMemo, useRef, useEffect } from "react"
 import Globe from "./components/Globe"
 import Sidebar from "./components/Sidebar"
 import GenreFilter from "./components/GenreFilter"
@@ -28,6 +28,13 @@ export default function App() {
     const cityLabels = new Set(filteredStores.map((s) => s.city))
     return allCities.filter((c) => cityLabels.has(c.label))
   }, [activeGenres, filteredStores])
+
+  // Clear selected store when genre filter removes it from filtered results
+  useEffect(() => {
+    if (selectedStore && !filteredStores.some((s) => s.name === selectedStore.name)) {
+      setSelectedStore(null)
+    }
+  }, [filteredStores, selectedStore])
 
   const handlePinDrop = useCallback(({ lat, lng }) => {
     setDroppedPin({ lat, lng })
