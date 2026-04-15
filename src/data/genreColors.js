@@ -43,7 +43,7 @@ const genreColors = {
   "Dub": "#059669",
   "Ska": "#34d399",
   "Dancehall": "#10b981",
-  "Tropicália": "#14b8a6",
+  "Tropicalia": "#14b8a6",
   "MPB": "#2dd4bf",
   "Bossa Nova": "#5eead4",
   "Samba": "#0d9488",

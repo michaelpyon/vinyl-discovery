@@ -88,11 +88,6 @@ const Globe = forwardRef(function Globe(
     },
   }))
 
-  // If no WebGL, render the fallback immediately
-  if (!webglSupported) {
-    return <GlobeFallback onPinDrop={onPinDrop} />
-  }
-
   // Resize observer
   useEffect(() => {
     const el = containerRef.current
@@ -239,6 +234,11 @@ const Globe = forwardRef(function Globe(
     },
     [onStoreClick, stopRotation, scheduleRotationResume]
   )
+
+  // If no WebGL, render the fallback (after all hooks)
+  if (!webglSupported) {
+    return <GlobeFallback onPinDrop={onPinDrop} />
+  }
 
   return (
     <div ref={containerRef} className="globe-container">
