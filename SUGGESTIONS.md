@@ -40,28 +40,35 @@ Verified against repo HEAD, the source of truth for the next deploy.
 - Pre-existing em dashes in `index.html` titles and `StaffPick.jsx` byline. Not
   introduced by this pass. Left untouched to stay additive.
 
+## Shipped wave 2
+
+- (#2, DONE) Replaced the default Vite boilerplate `README.md` with a real project
+  description: what CrateDigger does, the curated-data honesty disclosure, the social
+  card, tech notes, dev commands, and how to contribute a store. The GitHub page no
+  longer reads like an empty template for the first sharer or contributor who lands on
+  it. Honest counts only (13 countries, 19 cities).
+- (#4, DONE) Stripped all 37 dead `rating: 4.x` fields from `stores.js`. They were never
+  rendered (the card shows "Curated") but sitting in the data invited a future
+  contributor to re-render a fabricated score and undo the honesty fix. Pure hygiene,
+  module still parses, `vite build` clean.
+
+Also confirmed this wave: vinyl-discovery.vercel.app serves the app (HTTP 200) and
+`og.png` (1200x630 real PNG, image/png, 57807 bytes) under a Twitterbot user agent, so
+the canonical, og:url, and og:image already point at the working host. No defect to fix.
+
 ## Prioritized plan
 
 ### Quick wins
 
-1. (#1, DONE this pass) Surface the real store website as a "Visit website" link on the
+1. (#1, DONE prior pass) Surface the real store website as a "Visit website" link on the
    active store card. `StoreCard.jsx` plus `index.css`. Every store already carries a
    real `website` field that was never rendered, so the collector hit a dead end with no
    way to go visit or buy. Now the active card shows a "Visit website" link next to Copy
    link when a website exists. Effort S. No deploy needed to verify, build is clean.
 
-2. Replace the default Vite boilerplate `README.md` with a real one-paragraph project
-   description, screenshot, and the curated-data disclosure. Matters because the GitHub
-   page is the first thing a sharer or contributor lands on and right now it reads like
-   an empty template. Effort S. No deploy needed.
-
-3. Remove the em dashes in `index.html` titles and `StaffPick.jsx` byline (use a comma or
+2. Remove the em dashes in `index.html` titles and `StaffPick.jsx` byline (use a comma or
    "by"). Small polish, keeps share previews and the staff byline clean. Effort S. Needs
-   deploy to see in social previews.
-
-4. Strip the dead `rating` fields from `stores.js` so no future contributor accidentally
-   re-renders a fabricated score. Pure hygiene, reduces the chance the honesty fix gets
-   undone. Effort S. No deploy needed.
+   deploy to see in social previews. Left for a deploy-paired pass to stay additive.
 
 ### Bigger bets
 

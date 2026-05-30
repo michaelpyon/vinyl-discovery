@@ -1,16 +1,46 @@
-# React + Vite
+# CrateDigger
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Music discovery through vinyl culture. Spin the globe, drop a pin on a city you are
+about to visit, and instantly see real record stores there, each with a genre
+fingerprint and a staff pick. Built for collectors who plan trips around crate digging
+instead of a messy mix of Discogs tabs and saved map pins.
 
-Currently, two official plugins are available:
+![CrateDigger social card](public/og.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## What it does
 
-## React Compiler
+- An interactive 3D globe of real record stores across 13 countries and 19 cities,
+  from Rough Trade and A1 Records in New York to Hard Wax in Berlin, Amoeba in Los
+  Angeles, and Disk Union in Tokyo.
+- Each store card shows its neighborhood, the genres it digs deep on, a staff pick
+  album with a note, and a "Visit website" link straight to the real shop.
+- A genre filter to narrow the globe to the sounds you collect.
+- "Surprise me" to jump to a random shop, and a per-store share link so a single
+  store card travels as its own URL.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Data and honesty
 
-## Expanding the ESLint configuration
+Store listings, addresses, websites, and staff picks are editorially curated, not
+sourced from a live API or scraped reviews. Cards say "Curated" rather than showing a
+fabricated numeric rating. The data lives in `src/data/stores.js` and is meant to be
+real shops you can actually go visit and buy from.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech
+
+Static Vite plus React single page app. No backend. The globe is rendered with
+react-globe.gl on top of three.js.
+
+## Develop
+
+```bash
+npm install
+npm run dev      # local dev server
+npm run build    # production build to dist/
+npm run preview  # preview the production build
+```
+
+## Contributing a store
+
+Add a new object to the array in `src/data/stores.js` with a real shop: name, lat,
+lng, city, country, neighborhood, genres, a staffPick, address, vibe, description,
+and a website (or null). Keep it real, no invented ratings.
