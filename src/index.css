@@ -613,6 +613,15 @@ body {
   font-family: "JetBrains Mono", monospace;
 }
 
+.sidebar__footer-note {
+  margin-top: 6px;
+  font-size: 10px !important;
+  color: var(--text-subtle) !important;
+  opacity: 0.6;
+  font-family: "JetBrains Mono", monospace;
+  line-height: 1.5;
+}
+
 /* Sidebar Toggle (mobile) */
 .sidebar__toggle {
   position: absolute;

@@ -198,6 +198,9 @@ export default function Sidebar({
           <p>
             CrateDigger. Built for vinyl lovers.
           </p>
+          <p className="sidebar__footer-note">
+            Store listings and staff picks are editorially curated, not sourced from live data.
+          </p>
         </footer>
       </div>
 
