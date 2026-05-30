@@ -81,7 +81,27 @@ export default function StoreCard({ store, onClick, isActive }) {
 
       <p className="store-card__vibe">{store.vibe}</p>
 
-      {isActive && <ShareButton store={store} />}
+      {isActive && (
+        <div className="store-card__actions">
+          {store.website && (
+            <a
+              href={store.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="store-card__website"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              </svg>
+              Visit website
+            </a>
+          )}
+          <ShareButton store={store} />
+        </div>
+      )}
     </button>
   )
 }

@@ -513,6 +513,40 @@ body {
   border-color: var(--accent);
 }
 
+.store-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.store-card__actions .store-card__share {
+  margin-top: 12px;
+}
+
+.store-card__website {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 12px;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid var(--accent-glow);
+  border-radius: 6px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 500;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.store-card__website:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+}
+
 /* Staff Pick */
 .staff-pick {
   background: var(--bg);
