@@ -1,4 +1,41 @@
+import { useState } from "react"
 import { getGenreColor } from "../data/genreColors"
+
+function buildShareUrl(store) {
+  const url = new URL(window.location.href)
+  url.searchParams.set("store", String(store.id))
+  return url.toString()
+}
+
+function ShareButton({ store }) {
+  const [label, setLabel] = useState("Copy link")
+
+  function handleShare(e) {
+    e.stopPropagation()
+    const shareUrl = buildShareUrl(store)
+    const shareText = `${store.name} - ${store.neighborhood}, ${store.city}`
+
+    if (navigator.share) {
+      navigator.share({ title: shareText, url: shareUrl }).catch(() => {})
+    } else {
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        setLabel("Copied!")
+        setTimeout(() => setLabel("Copy link"), 2000)
+      }).catch(() => {})
+    }
+  }
+
+  return (
+    <button className="store-card__share" onClick={handleShare} type="button">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+        <polyline points="16 6 12 2 8 6" />
+        <line x1="12" y1="2" x2="12" y2="15" />
+      </svg>
+      {label}
+    </button>
+  )
+}
 
 export default function StoreCard({ store, onClick, isActive }) {
   return (
@@ -43,6 +80,8 @@ export default function StoreCard({ store, onClick, isActive }) {
       </div>
 
       <p className="store-card__vibe">{store.vibe}</p>
+
+      {isActive && <ShareButton store={store} />}
     </button>
   )
 }

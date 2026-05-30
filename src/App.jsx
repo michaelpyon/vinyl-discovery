@@ -7,10 +7,33 @@ import stores, { getAllGenres, getCities } from "./data/stores"
 const allGenres = getAllGenres()
 const allCities = getCities()
 
+// Parse ?store=<id> from the current URL; returns the matching store or null.
+function getStoreFromUrl() {
+  const param = new URLSearchParams(window.location.search).get("store")
+  if (!param) return null
+  const id = parseInt(param, 10)
+  if (!Number.isFinite(id)) return null
+  return stores.find((s) => s.id === id) ?? null
+}
+
+// Push the ?store= param into the URL without adding a history entry.
+function syncStoreToUrl(store) {
+  const url = new URL(window.location.href)
+  if (store) {
+    url.searchParams.set("store", String(store.id))
+  } else {
+    url.searchParams.delete("store")
+  }
+  window.history.replaceState(null, "", url.toString())
+}
+
 export default function App() {
   const globeRef = useRef()
-  const [droppedPin, setDroppedPin] = useState(null)
-  const [selectedStore, setSelectedStore] = useState(null)
+  const [droppedPin, setDroppedPin] = useState(() => {
+    const s = getStoreFromUrl()
+    return s ? { lat: s.lat, lng: s.lng } : null
+  })
+  const [selectedStore, setSelectedStore] = useState(() => getStoreFromUrl())
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [activeGenres, setActiveGenres] = useState([])
 
@@ -36,6 +59,11 @@ export default function App() {
     }
   }, [filteredStores, selectedStore])
 
+  // Keep the URL in sync whenever selectedStore changes
+  useEffect(() => {
+    syncStoreToUrl(selectedStore)
+  }, [selectedStore])
+
   const handlePinDrop = useCallback(({ lat, lng }) => {
     setDroppedPin({ lat, lng })
     setSelectedStore(null)
@@ -46,7 +74,21 @@ export default function App() {
     setSelectedStore(store)
     setDroppedPin({ lat: store.lat, lng: store.lng })
     setSidebarOpen(true)
+    if (globeRef.current) {
+      globeRef.current.flyTo(store.lat, store.lng, 1.5, 1200)
+    }
   }, [])
+
+  // On initial load, fly the globe to the store if one was in the URL.
+  const didInitialFly = useRef(false)
+  useEffect(() => {
+    if (didInitialFly.current) return
+    didInitialFly.current = true
+    const initial = getStoreFromUrl()
+    if (initial && globeRef.current) {
+      globeRef.current.flyTo(initial.lat, initial.lng, 1.5, 1200)
+    }
+  })
 
   const handleGenreToggle = useCallback((genre) => {
     setActiveGenres((prev) =>

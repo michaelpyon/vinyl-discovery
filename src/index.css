@@ -491,6 +491,28 @@ body {
   font-style: italic;
 }
 
+.store-card__share {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 12px;
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid var(--accent-glow);
+  border-radius: 6px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.store-card__share:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+}
+
 /* Staff Pick */
 .staff-pick {
   background: var(--bg);
