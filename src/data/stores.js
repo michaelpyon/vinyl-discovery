@@ -311,7 +311,7 @@ const stores = [
       note: "LA garage psych at its most unhinged. The Castle Face pressing rips.",
     },
     address: "3815 W Sunset Blvd, Los Angeles, CA 90026",
-    vibe: "No-frills, staff picks you can trust, and a killer punk section.",
+    vibe: "No-frills neighborhood shop with a deep punk and garage section.",
     description: "Unpretentious Mid-City shop with strong indie, punk, and garage rock bins.",
     website: "https://www.vacationvinyl.com",
   },

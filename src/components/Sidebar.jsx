@@ -33,7 +33,7 @@ export default function Sidebar({
         ...store,
         distance: haversine(droppedPin.lat, droppedPin.lng, store.lat, store.lng),
       }))
-      .filter((store) => store.distance <= 5000)
+      .filter((store) => store.distance <= 150)
       .sort((a, b) => a.distance - b.distance)
   }, [droppedPin, filteredStores])
 
@@ -43,6 +43,7 @@ export default function Sidebar({
 
   return (
     <aside className={`sidebar ${isOpen ? "sidebar--open" : ""}`}>
+      <div className="sidebar__handle" aria-hidden="true" />
       <div className="sidebar__inner">
         {/* Header */}
         <div className="sidebar__header">
@@ -63,7 +64,7 @@ export default function Sidebar({
             <h1>CrateDigger</h1>
           </div>
           <p className="sidebar__tagline">
-            Music discovery through vinyl culture
+            Every record shop worth the detour, on 1 globe
           </p>
         </div>
 
@@ -94,7 +95,7 @@ export default function Sidebar({
             </div>
             <p>Tap the globe or drop a random pin to start digging.</p>
             <p className="sidebar__empty-sub">
-              Discover record stores, local genres, and staff picks from around
+          Discover record stores, local genres, and CrateDigger picks from around
               the world.
             </p>
           </div>
@@ -173,7 +174,7 @@ export default function Sidebar({
           </div>
         )}
 
-        {/* Staff Pick */}
+        {/* Editorial Pick */}
         {selectedStore && (
           <div className="sidebar__section">
             <h2 className="sidebar__section-title">
@@ -187,7 +188,7 @@ export default function Sidebar({
               >
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
               </svg>
-              Staff Pick
+              CrateDigger Pick
             </h2>
             <StaffPick store={selectedStore} />
           </div>
@@ -199,13 +200,19 @@ export default function Sidebar({
             CrateDigger. Built for vinyl lovers.
           </p>
           <p className="sidebar__footer-note">
-            Store listings and staff picks are editorially curated, not sourced from live data.
+            Store listings and album picks are house editorial, not live inventory, hours, or shop quotes.
           </p>
         </footer>
       </div>
 
       {/* Mobile toggle */}
-      <button className="sidebar__toggle" onClick={onToggle}>
+      <button
+        className="sidebar__toggle"
+        onClick={onToggle}
+        type="button"
+        aria-label={isOpen ? "Collapse shop panel" : "Open shop panel"}
+        aria-expanded={isOpen}
+      >
         <svg
           width="20"
           height="20"

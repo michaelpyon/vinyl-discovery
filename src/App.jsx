@@ -1,8 +1,9 @@
-import { useState, useCallback, useMemo, useRef, useEffect } from "react"
-import Globe from "./components/Globe"
+import { lazy, Suspense, useState, useCallback, useMemo, useRef, useEffect } from "react"
 import Sidebar from "./components/Sidebar"
 import GenreFilter from "./components/GenreFilter"
 import stores, { getAllGenres, getCities } from "./data/stores"
+
+const Globe = lazy(() => import("./components/Globe"))
 
 const allGenres = getAllGenres()
 const allCities = getCities()
@@ -34,7 +35,9 @@ export default function App() {
     return s ? { lat: s.lat, lng: s.lng } : null
   })
   const [selectedStore, setSelectedStore] = useState(() => getStoreFromUrl())
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(() =>
+    Boolean(getStoreFromUrl()) || window.matchMedia("(min-width: 769px)").matches
+  )
   const [activeGenres, setActiveGenres] = useState([])
 
   // Filter stores based on selected genres
@@ -51,13 +54,6 @@ export default function App() {
     const cityLabels = new Set(filteredStores.map((s) => s.city))
     return allCities.filter((c) => cityLabels.has(c.label))
   }, [activeGenres, filteredStores])
-
-  // Clear selected store when genre filter removes it from filtered results
-  useEffect(() => {
-    if (selectedStore && !filteredStores.some((s) => s.name === selectedStore.name)) {
-      setSelectedStore(null)
-    }
-  }, [filteredStores, selectedStore])
 
   // Keep the URL in sync whenever selectedStore changes
   useEffect(() => {
@@ -79,24 +75,20 @@ export default function App() {
     }
   }, [])
 
-  // On initial load, fly the globe to the store if one was in the URL.
-  const didInitialFly = useRef(false)
-  useEffect(() => {
-    if (didInitialFly.current) return
-    didInitialFly.current = true
-    const initial = getStoreFromUrl()
-    if (initial && globeRef.current) {
-      globeRef.current.flyTo(initial.lat, initial.lng, 1.5, 1200)
-    }
-  })
-
   const handleGenreToggle = useCallback((genre) => {
-    setActiveGenres((prev) =>
-      prev.includes(genre)
-        ? prev.filter((g) => g !== genre)
-        : [...prev, genre]
-    )
-  }, [])
+    const next = activeGenres.includes(genre)
+      ? activeGenres.filter((item) => item !== genre)
+      : [...activeGenres, genre]
+
+    setActiveGenres(next)
+    if (
+      selectedStore &&
+      next.length > 0 &&
+      !selectedStore.genres.some((item) => next.includes(item))
+    ) {
+      setSelectedStore(null)
+    }
+  }, [activeGenres, selectedStore])
 
   const handleGenreClear = useCallback(() => {
     setActiveGenres([])
@@ -120,20 +112,30 @@ export default function App() {
 
   return (
     <div className="app">
-      <Globe
-        ref={globeRef}
-        onPinDrop={handlePinDrop}
-        onStoreClick={handleStoreClick}
-        droppedPin={droppedPin}
-        filteredStores={filteredStores}
-      />
+      <main className="map-stage" aria-label="Interactive record shop map">
+        <div className="map-masthead">
+          <p className="map-masthead__eyebrow">CrateDigger</p>
+          <p className="map-masthead__stat">
+            {filteredStores.length} curated shops · {allCities.length} cities
+          </p>
+        </div>
+        <Suspense fallback={<div className="globe-shell-loading" role="status">Tuning the globe...</div>}>
+          <Globe
+            ref={globeRef}
+            onPinDrop={handlePinDrop}
+            onStoreClick={handleStoreClick}
+            droppedPin={droppedPin}
+            filteredStores={filteredStores}
+          />
+        </Suspense>
+      </main>
       <GenreFilter
         genres={allGenres}
         activeGenres={activeGenres}
         onToggle={handleGenreToggle}
         onClear={handleGenreClear}
       />
-      <button className="surprise-btn" onClick={handleSurpriseMe}>
+      <button className="surprise-btn" onClick={handleSurpriseMe} type="button">
         <svg
           width="16"
           height="16"

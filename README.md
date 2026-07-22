@@ -2,7 +2,7 @@
 
 Music discovery through vinyl culture. Spin the globe, drop a pin on a city you are
 about to visit, and instantly see real record stores there, each with a genre
-fingerprint and a staff pick. Built for collectors who plan trips around crate digging
+fingerprint and a clearly labeled CrateDigger album pick. Built for collectors who plan trips around crate digging
 instead of a messy mix of Discogs tabs and saved map pins.
 
 ![CrateDigger social card](public/og.png)
@@ -12,7 +12,7 @@ instead of a messy mix of Discogs tabs and saved map pins.
 - An interactive 3D globe of real record stores across 13 countries and 19 cities,
   from Rough Trade and A1 Records in New York to Hard Wax in Berlin, Amoeba in Los
   Angeles, and Disk Union in Tokyo.
-- Each store card shows its neighborhood, the genres it digs deep on, a staff pick
+- Each store card shows its neighborhood, the genres it digs deep on, a house editorial album pick
   album with a note, and a "Visit website" link straight to the real shop.
 - A genre filter to narrow the globe to the sounds you collect.
 - "Surprise me" to jump to a random shop, and a per-store share link so a single
@@ -20,7 +20,7 @@ instead of a messy mix of Discogs tabs and saved map pins.
 
 ## Data and honesty
 
-Store listings, addresses, websites, and staff picks are editorially curated, not
+Store listings, addresses, websites, and album picks are house editorial, not
 sourced from a live API or scraped reviews. Cards say "Curated" rather than showing a
 fabricated numeric rating. The data lives in `src/data/stores.js` and is meant to be
 real shops you can actually go visit and buy from.

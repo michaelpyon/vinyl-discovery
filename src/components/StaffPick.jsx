@@ -17,7 +17,7 @@ export default function StaffPick({ store }) {
           <circle cx="12" cy="12" r="10" />
           <circle cx="12" cy="12" r="3" />
         </svg>
-        Staff Pick
+        House editorial
       </div>
 
       <div className="staff-pick__vinyl">
@@ -29,8 +29,8 @@ export default function StaffPick({ store }) {
 
       <h4 className="staff-pick__album">{album}</h4>
       <p className="staff-pick__artist">{artist}</p>
-      <p className="staff-pick__note">"{note}"</p>
-      <p className="staff-pick__from">— {store.name} staff</p>
+      <p className="staff-pick__note">“{note}”</p>
+      <p className="staff-pick__from">CrateDigger pick near {store.name}</p>
     </div>
   )
 }

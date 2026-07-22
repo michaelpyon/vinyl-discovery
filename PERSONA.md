@@ -25,7 +25,7 @@ It is a trip-planning job, not a browsing job. He hires CrateDigger the week bef
 2. Google Maps saved pins + "best record stores in [city]" blog posts from 2019
 3. Reddit city-thread searches, screenshotted into his notes app
 
-None of these tell him what a store digs deep on. That genre fingerprint plus staff pick is CrateDigger's whole wedge.
+None of these tell him what a store digs deep on. That genre fingerprint plus a clearly labeled CrateDigger album pick is the wedge.
 
 ## 3 named reference products he considers premium
 
@@ -51,7 +51,7 @@ MacBook Pro on the couch for planning (where the globe should sing), iPhone 15 i
 
 ## The unprompted-share moment
 
-He filters the globe to Techno, the planet strips down to a constellation with Berlin burning brightest, he clicks Hard Wax, the globe flies in, and the card reads a staff pick that is actually correct for that shop. He screen-records the spin-and-fly-in, posts the GIF to the group chat and r/vinyl with "found the shop map I always wanted", and pastes the per-store share URL. The share URL resolving to that exact card is what converts his 5 friends.
+He filters the globe to Techno, the planet strips down to a constellation with Berlin burning brightest, he clicks Hard Wax, the globe flies in, and the card pairs the shop with a clearly labeled CrateDigger album pick. He screen-records the spin-and-fly-in, posts the GIF to the group chat and r/vinyl with "found the shop map I always wanted", and pastes the per-store share URL. The share URL resolving to that exact card is what converts his 5 friends.
 
 ## V2 evangelist verdict
 

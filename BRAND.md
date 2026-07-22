@@ -2,7 +2,7 @@
 
 ## Positioning line (in Marcus's language)
 
-**"Every shop worth the detour, on 1 globe. Real stores, real staff picks, no fake ratings."**
+**"Every shop worth the detour, on 1 globe. Real stores, house editorial picks, no fake ratings."**
 
 Shorter variant for the header and OG copy: "The dig-day planner. 37 real record shops across 19 cities."
 
@@ -42,7 +42,7 @@ Scale: big confident display sizes for city/store names, small dense mono for me
 1. Write like a shop clerk who knows you, not a travel brand. "Tiny, packed, and full of treasures" is the house voice; keep it.
 2. Every factual claim stays checkable: real addresses, real websites, "Curated" instead of ratings. Never invent a number.
 3. Confidence without hype: no "discover your next obsession!", no exclamation points in UI copy.
-4. Use digger vocabulary correctly (shop, dig deep on, worth the detour, staff pick). Never say "vinyls".
+4. Use digger vocabulary correctly (shop, dig deep on, worth the detour, house pick). Never say "vinyls".
 5. Short. Card copy under 2 sentences. Empty states get 1 line plus 1 action.
 
 ## 3 taste references to measure against

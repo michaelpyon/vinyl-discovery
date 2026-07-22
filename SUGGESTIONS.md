@@ -7,7 +7,7 @@ A 32-year-old record collector who lives on r/vinyl and the Discogs forums and p
 Discogs store pages, Google Maps saved lists, and screenshots of other people's
 recommendation threads. CrateDigger makes them screenshot it the moment they spin the
 globe, drop a pin on a city they are about to visit, and instantly see 3 to 4 real shops
-with a genre fingerprint and a staff pick for each. The single thing that turns a
+with a genre fingerprint and a house editorial album pick for each. The single thing that turns a
 screenshot into a share is the per-store link with a real name they recognize (Hard Wax,
 Amoeba, Disk Union). What makes them bounce in 5 seconds: a globe that looks like a tech
 demo with no obvious payoff, fake-looking star ratings that signal "AI generated travel
@@ -26,8 +26,8 @@ Verified against repo HEAD, the source of truth for the next deploy.
   Phonica, Third Man, and more across 15-plus cities. Spot checks confirm real shops.
 - HONESTY FIX FROM PRIOR PASS IS PRESENT. `StoreCard.jsx` renders the word "Curated"
   with a tooltip "Curated editorial pick" instead of a fabricated numeric rating, and
-  `Sidebar.jsx` footer states "Store listings and staff picks are editorially curated,
-  not sourced from live data." No false claims of live, real-time, or sourced data.
+  `Sidebar.jsx` footer states that listings and album picks are house editorial, not
+  live inventory, hours, or shop quotes. No false claims of real-time or sourced data.
 - The legacy `rating: 4.x` fields still sit in the stores.js data objects but are NOT
   rendered anywhere (confirmed: no `store.rating` reference in src). Dead data only, not
   a user-facing fabrication. Safe to leave or strip later.

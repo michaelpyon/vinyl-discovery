@@ -23,7 +23,7 @@ First load = the pitch. Globe fades in already slowly auto-rotating with all 37 
 
 1. **Idle globe** (first load, auto-rotate, all pins)
 2. **Genre-filtered globe** (chips active, pins reduced, cities without matches go dark) - this is the money screen
-3. **Store selected** (fly-to animation done, StoreCard open: name, neighborhood, genre chips, staff pick, vibe line, address in mono, Visit website link, Curated badge)
+3. **Store selected** (fly-to animation done, StoreCard open: name, neighborhood, genre chips, house editorial album pick, vibe line, address in mono, Visit website link, Curated badge)
 4. **Pin dropped on arbitrary point** (nearby list sorted by distance in sidebar)
 5. **Surprise Me result** (random city fly-to + list)
 6. **Shared-store deep link** (?store=id): must open with card visible and globe already flown in; this is the group-chat entry point, treat it as a first impression
@@ -41,7 +41,7 @@ Carried-forward bets to honor (from V2): per-store Discogs jump link on the card
 ## Metadata / OG intent (X-readiness mandatory)
 
 - Title: "CrateDigger - Every record shop worth the detour, on 1 globe"
-- Description: lead with the honest stat: "37 real record shops across 19 cities, each with a genre fingerprint and a staff pick. No fake ratings."
+- Description: lead with the honest stat: "37 real record shops across 19 cities, each with a genre fingerprint and a CrateDigger album pick. No fake ratings."
 - **og:image (1200x630)**: MUST show the actual 3D globe, night side, amber pins glowing, with the CrateDigger wordmark and the stat line. Screenshot the real app, do not illustrate a generic globe. Current og.png exists and serves 200 but should be regenerated to match any visual refresh.
 - twitter:card summary_large_image (already set), keep canonical on vinyl-discovery.vercel.app
 - Nice-to-have: per-store OG copy is impossible on a static SPA without prerender; do not fake it, but keep ?store= links resolving fast so the default card still looks great when a store link is shared.
@@ -52,10 +52,10 @@ Claim status: TRUE as shipped. The 37 stores in src/data/stores.js are real shop
 
 Must remain disclosed:
 1. Listings are editorially curated, not from a live API; keep the "Curated" badge and the README honesty section.
-2. Staff picks are house editorial picks, not quotes from actual shop staff. The badge tooltip ("Curated editorial pick") covers this; do not label them as coming from the shops themselves anywhere in UI or OG copy.
+2. Album picks are house editorial, not quotes from actual shop staff. Label them as CrateDigger picks everywhere they surface; never call them shop staff picks in UI or OG copy.
 3. Hours/inventory are not tracked; never imply real-time data ("open now", "in stock" are banned phrases).
 4. Any store count shown must be computed from the dataset, not typed.
 
 ## The screenshot-worthy moment to engineer
 
-**The filter-and-fly.** User taps the Techno chip: non-matching pins fade out over ~400ms and the globe becomes a sparse constellation with Berlin glowing. User clicks Hard Wax: 1200ms fly-in, card slides up with the staff pick. That 5-second sequence is the GIF Marcus posts. Engineer for it explicitly: smooth pin fade transitions (not pop-in/out), fly-to that never stutters, card entrance timed to land as the camera settles, and a UI clean enough that a raw screen recording needs no cropping.
+**The filter-and-fly.** User taps the Techno chip: non-matching pins fade out over ~400ms and the globe becomes a sparse constellation with Berlin glowing. User clicks Hard Wax: 1200ms fly-in, card slides up with the CrateDigger pick. That 5-second sequence is the GIF Marcus posts. Engineer for it explicitly: smooth pin fade transitions (not pop-in/out), fly-to that never stutters, card entrance timed to land as the camera settles, and a UI clean enough that a raw screen recording needs no cropping.
